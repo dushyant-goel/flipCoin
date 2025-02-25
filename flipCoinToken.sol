@@ -25,7 +25,7 @@ contract FlipCoinToken is ERC20Interface {
         decimals = 0;
 
         _totalSupply = 100; // initial supply 100 attoFLP
-        OWNER = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+        OWNER = 0x11E66b29506B5aEA3149775272d6Ced39079aF7A;
 
         // Initial coin creation.
         balances[OWNER] = _totalSupply;

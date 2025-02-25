@@ -22,9 +22,9 @@ contract FlipCoinToken is ERC20Interface {
     constructor() {
         symbol = "FLP";
         name = "Flip Coin";
-        decimals = 18;
+        decimals = 0;
 
-        _totalSupply = 100_000_000_000_000_000_000; // initial supply 100FLP
+        _totalSupply = 100; // initial supply 100 attoFLP
         OWNER = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
 
         // Initial coin creation.
@@ -99,7 +99,7 @@ contract FlipCoinToken is ERC20Interface {
 
         uint256 totalCost = 0;
         for (uint256 i = 0; i < amount; i++) {
-            uint256 currentPrice = calculatePrice(currentSupply + i); // (in wei units)
+            uint256 currentPrice = calculatePrice(currentSupply + i); 
             totalCost += currentPrice; // totalCost is the sum of all prices along the curve.
         }
 
@@ -127,7 +127,7 @@ contract FlipCoinToken is ERC20Interface {
 
     // to burn tokens
     function burn(uint256 amount) public returns (bool success) {
-        require(balances[msg.sender] > amount, "Insufficiet balance to burn");
+        require(balances[msg.sender] >= amount, "Insufficiet balance to burn");
 
         uint256 currentSupply = _totalSupply;
         uint256 totalPayout = 0;
@@ -156,7 +156,7 @@ contract FlipCoinToken is ERC20Interface {
     // to calculate prices based on the bonding curve
     // price(FLP) = m.S + b
     function calculatePrice(uint256 supply) internal view returns (uint256) {
-        return (m * supply) / (10**decimals) + b;
+        return (m * supply) + b;
     }
 
     // check the balance of ETH with contract

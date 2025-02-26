@@ -24,7 +24,7 @@ contract FlipCoinLogToken is ERC20Interface {
         name = "Flip Log Coin";
         decimals = 0;
 
-        _totalSupply = 100; // initial supply 100 attoFLP
+        _totalSupply = 100; // initial supply 100 FLP
         OWNER = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
 
         // Initial coin creation.
@@ -154,9 +154,9 @@ contract FlipCoinLogToken is ERC20Interface {
     }
 
     // to calculate prices based on the bonding curve
-    // price(FLP) = m.S + b
+    // price(FLP) = m.log_2(S) + b
     function calculatePrice(uint256 supply) internal view returns (uint256) {
-        return log_2(supply) + b;
+        return m*log_2(supply) + b;
     }
 
     // check the balance of ETH with contract
